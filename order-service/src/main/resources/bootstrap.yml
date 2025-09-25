@@ -1,9 +1,9 @@
 spring:
   application:
-    name: order-service  # QUAN TRỌNG: phải khớp với tên trong config server
+    name: order-service   # phải khớp với tên file config trên Config Server
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://localhost:8888   # URL Config Server
       fail-fast: true
       retry:
         max-attempts: 6
@@ -11,7 +11,7 @@ spring:
         max-interval: 10000
         multiplier: 1.5
 
-# Config logging cho bootstrap phase
+# Logging bootstrap phase để debug config loading
 logging:
   level:
     org.springframework.cloud.config: INFO
