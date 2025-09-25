@@ -8,18 +8,6 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/your-username/config-repo
-          default-label: main
-          clone-on-start: true
-          force-pull: true
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: refresh,health,info
+          uri: https://github.com/your-username/microservices-config-repo
+          # HOẶC dùng local filesystem:
+          # uri: file:///${user.home}/config-re
