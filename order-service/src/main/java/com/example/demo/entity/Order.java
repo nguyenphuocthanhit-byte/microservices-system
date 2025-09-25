@@ -38,7 +38,7 @@ public class Order {
         PENDING, CONFIRMED, SHIPPED, DELIVERED, CANCELLED
     }
 
-    // Constructors, getters, setters
+    // Constructors
     public Order() {}
 
     public Order(Long userId, String product, Integer quantity, BigDecimal unitPrice) {
@@ -52,9 +52,6 @@ public class Order {
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
-        if (totalAmount == null) {
-            totalAmount = unitPrice.multiply(BigDecimal.valueOf(quantity));
-        }
     }
 
     // Getters and Setters
