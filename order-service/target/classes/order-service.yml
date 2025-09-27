@@ -15,9 +15,6 @@ spring:
         max-interval: 10000
         multiplier: 1.5
 
-  profiles:
-    active: default  # profile phải match với config repo
-
 logging:
   level:
     org.springframework.cloud.config.client: DEBUG
