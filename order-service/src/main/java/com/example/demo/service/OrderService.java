@@ -3,7 +3,7 @@ package com.example.demo.service;
 import com.example.demo.entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import repository.OrderRepository;
+import com.example.demo.repository.OrderRepository;
 
 import java.util.List;
 import java.util.Optional;
