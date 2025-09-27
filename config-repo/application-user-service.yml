@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user-service  # THÊM DÒNG NÀY
+    name: user-service
   datasource:
     url: jdbc:postgresql://localhost:5435/user_service
     username: postgres
@@ -8,27 +8,25 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop  # ĐỔI THÀNH create-drop (cho lần đầu)
     show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-        jdbc:
-          lob:
-            non_contextual_creation: true
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
 
 server:
   port: 8081
 
 eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
   instance:
-    instance-id: user-service:${spring.application.instance-id:${random.value}}
+    instance-id: user-service:${random.value}
 
-  # PostgreSQL specific properties
-  sql:
-    init:
-      platform: postgresql
-  jpa:
-    defer-datasource-initialization: true
+# XÓA HOÀN TOÀN CÁC DÒNG SAU:
+# database-platform: org.hibernate.dialect.PostgreSQLDialect
+# sql.init.platform: postgresql
+# jpa.defer-datasource-initialization: true
+# format_sql: true
+# jdbc.lob.non_contextual_creation: true
