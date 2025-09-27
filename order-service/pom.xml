@@ -110,6 +110,11 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!-- Plugin build Spring Boot fat jar -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
         </plugins>
     </build>
 </project>

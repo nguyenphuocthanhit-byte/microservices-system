@@ -1,9 +1,12 @@
 spring:
+  application:
+    name: order-service  # THÊM DÒNG NÀY
   datasource:
     url: jdbc:postgresql://localhost:5435/order_service
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -23,10 +26,3 @@ server:
 eureka:
   instance:
     instance-id: order-service:${spring.application.instance-id:${random.value}}
-
-  # PostgreSQL specific properties
-  sql:
-    init:
-      platform: postgresql
-  jpa:
-    defer-datasource-initialization: true

@@ -1,0 +1,26 @@
+server:
+  port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/nguyenphuocthanhit-byte/microservices-system
+          default-label: main
+          search-paths: config-repo  # QUAN TRỌNG: chỉ định thư mục config
+          clone-on-start: true
+          force-pull: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info

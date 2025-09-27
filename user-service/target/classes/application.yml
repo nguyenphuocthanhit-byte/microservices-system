@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: user-service   # phải khớp với tên file config trên Config Server
+  config:
+    import: "optional:configserver:"
+
+  cloud:
+    config:
+      uri: http://localhost:8888   # URL Config Server
+      fail-fast: true
+      retry:
+        max-attempts: 10
+        max-interval: 2000
+
+# Logging bootstrap phase để debug
+logging:
+  level:
+    org.springframework.cloud.config: INFO
+    org.springframework.boot.context.config: INFO

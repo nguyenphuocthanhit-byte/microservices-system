@@ -1,0 +1,5 @@
+com\example\demo\entity\Order$OrderStatus.class
+com\example\demo\service\OrderService.class
+repository\OrderRepository.class
+com\example\demo\entity\Order.class
+com\example\demo\OrderServiceApplication.class
