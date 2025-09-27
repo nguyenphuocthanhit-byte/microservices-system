@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user-service   # phải khớp với tên file config trên Config Server
+    name: application-user-service   # phải khớp với tên file config trên Config Server
   config:
     import: "optional:configserver:"
 

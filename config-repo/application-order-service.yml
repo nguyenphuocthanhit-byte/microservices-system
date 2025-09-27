@@ -6,10 +6,9 @@ spring:
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
-
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create-drop  # ĐỔI THÀNH create-drop (cho lần đầu)
     show-sql: true
     properties:
       hibernate:
