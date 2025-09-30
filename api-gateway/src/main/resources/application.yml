@@ -4,7 +4,20 @@ server:
 spring:
   application:
     name: api-gateway
+
+  # CONFIG CLIENT - để kết nối Config Server
+  config:
+    import: "optional:configserver:http://cloud-config-server:8888"
   cloud:
+    config:
+      fail-fast: true
+      retry:
+        initial-interval: 3000
+        max-attempts: 10
+        max-interval: 10000
+        multiplier: 1.5
+
+    # GATEWAY CONFIG - riêng biệt với config client
     gateway:
       discovery:
         locator:
@@ -23,16 +36,18 @@ spring:
             - Path=/api/orders/**
           filters:
             - StripPrefix=1
-    config:
-      import: optional:configserver:http://localhost:8888
 
+# EUREKA CLIENT - để kết nối Eureka Server
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka
-
+#      defaultZone: http://eureka-server:8761/eureka  # ✅ Dùng service name
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
 management:
   endpoints:
     web:
       exposure:
-        include: health,gateway,routes
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

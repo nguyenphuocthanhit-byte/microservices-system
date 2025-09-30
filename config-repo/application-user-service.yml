@@ -2,8 +2,8 @@ spring:
   application:
     name: user-service
   datasource:
-    url: jdbc:postgresql://localhost:5435/user_service
-    username: postgres
+    url: jdbc:postgresql://host.docker.internal:5435/user_service
+    username: microservice_user
     password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
@@ -20,9 +20,19 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+#      defaultZone: http://eureka-server:8761/eureka/
+    defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
   instance:
     instance-id: user-service:${random.value}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 # XÓA HOÀN TOÀN CÁC DÒNG SAU:
 # database-platform: org.hibernate.dialect.PostgreSQLDialect
