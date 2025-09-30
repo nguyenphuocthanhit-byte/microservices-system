@@ -9,13 +9,13 @@ spring:
     config:
       uri: http://localhost:8888
       fail-fast: true
-    retry:
-      initial-interval: 3000
-      max-attempts: 10
-      max-interval: 10000
-      multiplier: 1.5
+      retry:
+        initial-interval: 3000
+        max-attempts: 10
+        max-interval: 10000
+        multiplier: 1.5
 
 logging:
   level:
-    org.springframework.cloud.config.client: DEBUG
+    org.springframework.cloud.config: INFO
     org.springframework.boot.context.config: INFO
