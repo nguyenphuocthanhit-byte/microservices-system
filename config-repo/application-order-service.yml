@@ -2,7 +2,7 @@ spring:
   application:
     name: order-service
   datasource:
-    url: jdbc:postgresql://host.docker.internal:5435/order_service
+    url: jdbc:postgresql://postgres:5432/order_service
     username: microservice_user
     password: 1234
     driver-class-name: org.postgresql.Driver

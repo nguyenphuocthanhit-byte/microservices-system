@@ -4,7 +4,7 @@ services:
     container_name: postgres
     environment:
       POSTGRES_DB: microservices_db
-      POSTGRES_USER: postgres
+      POSTGRES_USER: microservice_user
       POSTGRES_PASSWORD: 1234
     ports:
       - "5435:5432"
@@ -60,6 +60,7 @@ services:
       - microservices-network
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5435/user_service #setting connection DB localhost
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/user_service
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
       - SPRING_CONFIG_IMPORT=optional:configserver:http://cloud-config-server:8888
@@ -81,6 +82,7 @@ services:
       - microservices-network
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+#      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5435/order_service
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/order_service
       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-server:8761/eureka
       - SPRING_CONFIG_IMPORT=optional:configserver:http://cloud-config-server:8888
