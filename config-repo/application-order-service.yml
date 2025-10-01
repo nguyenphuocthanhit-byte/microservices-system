@@ -14,6 +14,11 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
+  rabbitmq:
+    host: rabbitmq   # vì chạy trong docker-compose nên dùng tên service "rabbitmq"
+    port: 5672
+    username: admin
+    password: admin
 
 server:
   port: 8082
