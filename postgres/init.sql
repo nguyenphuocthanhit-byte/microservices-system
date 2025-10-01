@@ -23,11 +23,6 @@ CREATE TABLE IF NOT EXISTS users (
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO microservice_user;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO microservice_user;
 
-INSERT INTO users (name, email) VALUES
-('Alice', 'alice@example.com'),
-('Bob', 'bob@example.com')
-ON CONFLICT (email) DO NOTHING;
-
 -- Kết nối và tạo bảng cho order_service
 \c order_service;
 
@@ -43,7 +38,4 @@ CREATE TABLE IF NOT EXISTS orders (
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO microservice_user;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO microservice_user;
 
-INSERT INTO orders (user_id, product_name, quantity) VALUES
-(1, 'Laptop', 1),
-(2, 'Mouse', 2)
 ON CONFLICT DO NOTHING;
