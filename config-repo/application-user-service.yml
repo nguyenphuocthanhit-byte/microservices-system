@@ -8,11 +8,12 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
-      ddl-auto: create-drop  # ĐỔI THÀNH create-drop (cho lần đầu)
+      ddl-auto: validate  # ĐỔI THÀNH create-drop (cho lần đầu)
     show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
 
 server:
   port: 8081
