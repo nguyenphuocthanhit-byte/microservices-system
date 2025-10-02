@@ -1,5 +1,7 @@
-com\example\demo\service\UserService.class
+com\example\demo\config\RabbitMQConfig.class
 com\example\demo\entity\User.class
+com\example\demo\service\RabbitMQProducer.class
+com\example\demo\service\UserService.class
 com\example\demo\controller\UserController.class
 com\example\demo\UserServiceApplication.class
 com\example\demo\repository\UserRepository.class

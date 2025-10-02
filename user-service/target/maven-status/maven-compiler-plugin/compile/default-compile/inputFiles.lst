@@ -1,4 +1,6 @@
 D:\work\microservices-system\user-service\src\main\java\com\example\demo\service\UserService.java
+D:\work\microservices-system\user-service\src\main\java\com\example\demo\config\RabbitMQConfig.java
+D:\work\microservices-system\user-service\src\main\java\com\example\demo\service\RabbitMQProducer.java
 D:\work\microservices-system\user-service\src\main\java\com\example\demo\entity\User.java
 D:\work\microservices-system\user-service\src\main\java\com\example\demo\UserServiceApplication.java
 D:\work\microservices-system\user-service\src\main\java\com\example\demo\controller\UserController.java

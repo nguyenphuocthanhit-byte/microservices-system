@@ -1,5 +1,8 @@
-com\example\demo\entity\Order$OrderStatus.class
+com\example\demo\config\RabbitMQConfig.class
 com\example\demo\service\OrderService.class
+com\example\demo\service\RabbitMQConsumer.class
+com\example\demo\controller\OrderController.class
+com\example\demo\entity\Order$OrderStatus.class
 com\example\demo\entity\Order.class
 com\example\demo\OrderServiceApplication.class
 com\example\demo\repository\OrderRepository.class

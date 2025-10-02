@@ -24,9 +24,9 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO microservice_user;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO microservice_user;
 
 -- INSERT dữ liệu mẫu cho user_service
-INSERT INTO users (name, email) VALUES
-('Alice', 'alice@example.com'),
-('Bob', 'bob@example.com')
+INSERT INTO users (id, name, email, created_at)
+
+VALUES (1, 'Alice', 'alice@example.com', NOW());
 ON CONFLICT (email) DO NOTHING;
 
 -- Kết nối và tạo bảng cho order_service

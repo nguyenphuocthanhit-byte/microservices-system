@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.event.UserCreatedEvent;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +13,7 @@ public class RabbitMQConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQConsumer.class);
 
     @RabbitListener(queues = "user_queue")
-    public void consumeUserCreationEvent(User user) {
+    public void consumeUserCreationEvent(UserCreatedEvent user) {
         LOGGER.info("Received user creation event: {}", user);
 
         // Xử lý logic khi có user mới được tạo
@@ -20,9 +21,9 @@ public class RabbitMQConsumer {
         processNewUser(user);
     }
 
-    private void processNewUser(User user) {
+    private void processNewUser(UserCreatedEvent user) {
         // Logic xử lý khi có user mới
-        System.out.println("Processing new user: " + user.getName() + " with email: " + user.getEmail());
+        LOGGER.info("Processing new user: " + user.getName() + " with email: " + user.getEmail());
 
         // Ví dụ: Tạo cart mặc định cho user
         createDefaultCartForUser(user.getId());
@@ -32,12 +33,12 @@ public class RabbitMQConsumer {
     }
 
     private void createDefaultCartForUser(Long userId) {
-        System.out.println("Creating default cart for user ID: " + userId);
+        LOGGER.info("Creating default cart for user ID: " + userId);
         // Logic tạo cart
     }
 
-    private void sendWelcomeEmail(User user) {
-        System.out.println("Sending welcome email to: " + user.getEmail());
+    private void sendWelcomeEmail(UserCreatedEvent user) {
+        LOGGER.info("Sending welcome email to: " + user.getEmail());
         // Logic gửi email
     }
 }

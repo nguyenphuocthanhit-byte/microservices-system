@@ -20,6 +20,7 @@ public class UserController {
 
     @GetMapping
     public List<User> getAllUsers() {
+        log.info("getAllUsers user");
         return userService.findAll();
     }
 
