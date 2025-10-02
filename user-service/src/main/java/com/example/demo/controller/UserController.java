@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.User;
 import com.example.demo.service.UserService;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/users")
+@Slf4j
 public class UserController {
 
     @Autowired
@@ -33,7 +35,8 @@ public class UserController {
         if (userService.existsByEmail(user.getEmail())) {
             return ResponseEntity.badRequest().build();
         }
-        User savedUser = userService.save(user);
+        log.info("Create user");
+        User savedUser = userService.createUser(user);
         return ResponseEntity.ok(savedUser);
     }
 

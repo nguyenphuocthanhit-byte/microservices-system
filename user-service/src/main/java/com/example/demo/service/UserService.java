@@ -4,6 +4,7 @@ import com.example.demo.entity.User;
 import com.example.demo.repository.UserRepository;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,9 +12,11 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     final private UserRepository userRepository;
+    final private RabbitMQProducer rabbitMQProducer;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -37,5 +40,15 @@ public class UserService {
 
     public boolean existsByEmail(String email) {
         return userRepository.existsByEmail(email);
+    }
+
+    public User createUser(User user) {
+        // Logic để tạo user trong database
+        log.info("Creating user: " + user.getName());
+        userRepository.save(user);
+        // Gửi event thông báo user đã được tạo
+        rabbitMQProducer.sendUserCreationEvent(user);
+
+        return user;
     }
 }
