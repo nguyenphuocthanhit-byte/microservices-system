@@ -9,6 +9,7 @@ spring:
 #    Config postgre in localhost
 #    url: jdbc:postgresql://localhost:5435/order_service
 #    username: postgres
+
     password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
