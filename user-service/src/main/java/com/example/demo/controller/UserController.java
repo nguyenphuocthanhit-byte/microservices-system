@@ -46,7 +46,7 @@ public class UserController {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             User existingUser = user.get();
-            existingUser.setName(userDetails.getName());
+            existingUser.setUsername(userDetails.getUsername());
             existingUser.setEmail(userDetails.getEmail());
             User updatedUser = userService.save(existingUser);
             return ResponseEntity.ok(updatedUser);

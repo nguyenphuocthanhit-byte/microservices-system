@@ -44,7 +44,7 @@ public class UserService {
 
     public User createUser(User user) {
         // Logic để tạo user trong database
-        log.info("Creating user: " + user.getName());
+        log.info("Creating user: " + user.getUsername());
         userRepository.save(user);
         // Gửi event thông báo user đã được tạo
         rabbitMQProducer.sendUserCreationEvent(user);

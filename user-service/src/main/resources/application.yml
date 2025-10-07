@@ -19,3 +19,8 @@ logging:
   level:
     org.springframework.cloud.config: INFO
     org.springframework.boot.context.config: INFO
+
+jwt:
+  secret: mySuperSecretKeyForJwt1234567890
+  expiration-ms: 900000        # 15 minutes
+  refresh-expiration-ms: 1209600000  # 14 days

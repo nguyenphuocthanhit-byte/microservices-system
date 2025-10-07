@@ -14,8 +14,11 @@ GRANT ALL PRIVILEGES ON DATABASE order_service TO microservice_user;
 
 CREATE TABLE IF NOT EXISTS users (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    first_name VARCHAR(255) NOT NULL,
+    last_name VARCHAR(255) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -24,10 +27,20 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO microservice_user;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO microservice_user;
 
 -- INSERT dữ liệu mẫu cho user_service
-INSERT INTO users (id, name, email, created_at)
-
-VALUES (1, 'Alice', 'alice@example.com', NOW());
+INSERT INTO users (first_name, last_name, email, password, role, created_at, updated_at)
+VALUES
+    ('Alice', 'Nguyen', 'alice@example.com', 'password123', 'ROLE_USER', NOW(), NOW()),
+    ('Bob', 'Tran', 'bob@example.com', 'password123', 'ROLE_ADMIN', NOW(), NOW())
 ON CONFLICT (email) DO NOTHING;
+
+CREATE TABLE IF NOT EXISTS refresh_tokens (
+    id BIGSERIAL PRIMARY KEY,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    expiry_date TIMESTAMP NOT NULL,
+    user_id BIGINT UNIQUE,  -- vì quan hệ OneToOne
+    CONSTRAINT fk_refresh_token_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+);
+
 
 -- Kết nối và tạo bảng cho order_service
 \c order_service;
@@ -49,3 +62,5 @@ INSERT INTO orders (user_id, product_name, quantity) VALUES
 (1, 'Laptop', 1),
 (2, 'Mouse', 2)
 ON CONFLICT (id) DO NOTHING;
+
+
