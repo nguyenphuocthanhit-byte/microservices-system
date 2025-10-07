@@ -10,8 +10,8 @@ eureka:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-#      defaultZone: http://eureka-server:8761/eureka
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://eureka-server:8761/eureka #config run container with docker
+#      defaultZone: http://localhost:8761/eureka/ #config run localhost
   server:
     enable-self-preservation: false
     eviction-interval-timer-in-ms: 10000

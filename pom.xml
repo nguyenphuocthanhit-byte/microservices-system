@@ -26,7 +26,6 @@
         <module>user-service</module>
         <module>order-service</module>
         <module>common-service</module>
-        <module>auth-service</module>
     </modules>
 
     <properties>

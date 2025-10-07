@@ -27,9 +27,12 @@ spring:
         - id: user-service
           uri: lb://user-service
           predicates:
+            - Path=/api/auth/**
             - Path=/api/users/**
+
           filters:
             - StripPrefix=1
+
         - id: order-service
           uri: lb://order-service
           predicates:
