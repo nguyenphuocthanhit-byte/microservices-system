@@ -2,8 +2,11 @@ spring:
   application:
     name: order-service
   datasource:
-    url: jdbc:postgresql://postgres:5432/order_service
-    username: microservice_user
+#    Config postgre in docker
+#    url: jdbc:postgresql://postgres:5432/order_service
+#    username: microservice_user
+    url: jdbc:postgresql://localhost:5432/order_service
+    username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
   jpa:
