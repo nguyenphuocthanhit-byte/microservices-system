@@ -7,7 +7,7 @@ spring:
 
   cloud:
     config:
-      uri: http://localhost:8888   # URL Config Server
+#      uri: http://cloud-config-server:8888   # URL Config Server
       fail-fast: true
       retry:
         initial-interval: 3000
