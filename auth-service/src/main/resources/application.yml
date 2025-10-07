@@ -1,6 +1,0 @@
-server:
-    port: 8083
-
-jwt:
-    secret: mySecretKeymySecretKeymySecretKeymySecretKeymySecretKey
-    expiration: 86400000   # 1 ngày tính bằng ms

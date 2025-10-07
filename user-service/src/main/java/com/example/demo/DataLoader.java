@@ -24,8 +24,9 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         if (userRepository.findByUsername("admin").isEmpty()) {
             User admin = User.builder()
-                    .username("admin")
+                    .username("admin123")
                     .password(passwordEncoder.encode("admin123"))
+                    .email("admin.123@gmail.com")
                     .roles(Set.of(Role.ROLE_ADMIN, Role.ROLE_USER))
                     .build();
             userRepository.save(admin);
