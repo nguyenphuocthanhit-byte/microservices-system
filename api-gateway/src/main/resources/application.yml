@@ -39,6 +39,13 @@ spring:
             - Path=/api/orders/**
           filters:
             - StripPrefix=1
+      global cors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            allowCredentials: true
 
 # EUREKA CLIENT - để kết nối Eureka Server
 eureka:
