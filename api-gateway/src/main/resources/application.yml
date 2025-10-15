@@ -8,6 +8,7 @@ spring:
   # CONFIG CLIENT - để kết nối Config Server
   config:
     import: "optional:configserver:http://cloud-config-server:8888"
+
   cloud:
     config:
       fail-fast: true
@@ -17,42 +18,42 @@ spring:
         max-interval: 10000
         multiplier: 1.5
 
-    # GATEWAY CONFIG - riêng biệt với config client
-    gateway:
+    gateway:  # 👈 Nằm dưới spring.cloud (rất quan trọng)
       discovery:
         locator:
-          enabled: true
+          enabled: false  # ✅ Tắt auto discovery
           lower-case-service-id: true
+
       routes:
-        - id: user-service
+        - id: user-service-auth
           uri: lb://user-service
           predicates:
             - Path=/api/auth/**
-            - Path=/api/users/**
-
           filters:
-            - StripPrefix=1
+            - StripPrefix=0
+            - PreserveHostHeader=true
+
+        - id: user-service-users
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+          filters:
+            - StripPrefix=0
 
         - id: order-service
           uri: lb://order-service
           predicates:
             - Path=/api/orders/**
           filters:
-            - StripPrefix=1
-      global cors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:3000"
-            allowedMethods: "*"
-            allowedHeaders: "*"
-            allowCredentials: true
+            - StripPrefix=0
 
 # EUREKA CLIENT - để kết nối Eureka Server
 eureka:
   client:
     service-url:
-#      defaultZone: http://eureka-server:8761/eureka  # ✅ Dùng service name
       defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
+
+# ACTUATOR - để kiểm tra routes và health
 management:
   endpoints:
     web:
@@ -61,3 +62,12 @@ management:
   endpoint:
     health:
       show-details: always
+    gateway:
+      enabled: true  # ✅ Quan trọng để xem /actuator/gateway/routes
+
+logging:
+  level:
+    com.netflix.eureka: DEBUG
+    com.netflix.discovery: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG

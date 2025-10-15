@@ -27,8 +27,9 @@ public class RabbitMQProducer {
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 
-    @CircuitBreaker(name = "rabbitMqCB", fallbackMethod = "fallbackSend")
+    @CircuitBreaker(name = "rabbitMqCB", fallbackMethod = "fallbackSendUserCreationEvent")
     public void sendUserCreationEvent(Object user) {
+
         rabbitTemplate.convertAndSend(
                 RabbitMQConfig.EXCHANGE_NAME,
                 RabbitMQConfig.ROUTING_KEY,
@@ -38,7 +39,7 @@ public class RabbitMQProducer {
     }
 
 
-    public void fallbackSend(User user, Throwable t) throws JsonProcessingException {
+    public void fallbackSendUserCreationEvent(Object user, Throwable t) throws JsonProcessingException {
         System.out.println("⚠️ MQ unavailable! Saving message to pending table. Reason: " + t.getMessage());
         log.error("⚠️ MQ unavailable! Saving message to pending table. Reason: ", t.getMessage());
 
