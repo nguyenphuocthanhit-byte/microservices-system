@@ -16,7 +16,7 @@ import java.util.Optional;
 public class UserService {
 
     final private UserRepository userRepository;
-    final private RabbitMQProducer rabbitMQProducer;
+    final private OrderMQProducer orderMQProducer;
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -47,7 +47,7 @@ public class UserService {
         log.info("Creating user: " + user.getUsername());
         userRepository.save(user);
         // Gửi event thông báo user đã được tạo
-        rabbitMQProducer.sendUserCreationEvent(user);
+        orderMQProducer.sendUserCreationEvent(user);
 
         return user;
     }

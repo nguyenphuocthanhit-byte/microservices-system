@@ -4,6 +4,7 @@ import com.example.demo.entity.PendingMessage;
 import com.example.demo.repository.PendingMessageRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +14,11 @@ import java.util.List;
 @Slf4j
 public class PendingMessageRecoveryJob {
 
-    private final PendingMessageRepository repo;
-    private final RabbitTemplate rabbitTemplate;
+    @Autowired
+    private PendingMessageRepository repo;
 
-    public PendingMessageRecoveryJob(PendingMessageRepository repo, RabbitTemplate rabbitTemplate) {
-        this.repo = repo;
-        this.rabbitTemplate = rabbitTemplate;
-    }
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     // Chạy mỗi 30s để gửi lại message chưa gửi được
     @Scheduled(fixedDelay = 30000)
